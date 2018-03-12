@@ -24,6 +24,8 @@ document.getElementById("start").addEventListener("click", function(){
     var space2 = space.innerText = ' _ ';
     document.getElementById('word').append(space2);
   };
+
+  
   document.onkeyup = function(event){
     var userGuess = event.key;
     guessRemain--;
@@ -42,8 +44,7 @@ document.getElementById("start").addEventListener("click", function(){
     newRemain();
     updateLetterGuess();
     updateGuesses();
-
-    //reset variable needs for game end
+    
     var reset = function() {
       guesses = 10;
       guessRemain = 10;
@@ -53,5 +54,21 @@ document.getElementById("start").addEventListener("click", function(){
       newGuess();
       };
 
-  };
-});
+    };
+  });
+
+/* 
+  document.getElementById('reset').addEventListener("click", function(){
+    //reset variable needs for game end
+     var reset1 = function() {
+      guesses = 10;
+      guessRemain = 10;
+      userGuessed = [];
+      wins = 0;
+      losses = 0;
+      };
+
+      document.getElementById('word').append(space2);
+  });
+
+  */

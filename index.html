@@ -16,23 +16,27 @@
     <title>Hangman Game</title>
   </head>
   <body>
-      <section class='container-flex bg-success'>
-          <div class= 'container text-center pb-3'>
-              <h1 class='display-2'>
-                  Hangman
+      <section class='container-flex bg-secondary pb-5'>
+          <div class = 'row bg-success'>
+              <div class= 'container text-center pb-3'>
+                 <h1 class='display-2'>
+                    Hangman
                 </h1>
-                <h2 class='display-4 text-warning'>
+                <h2 class='h1 text-warning'>
                     Guess the Word:
                 </h2>
-                <div id="word">
+                <div class = "display-3" id="word">
                 </div>
-                <button class= 'btn btn-lrg py-2' id='start'>
-                    Start / Reset
+                <button class= 'btn btn-lrg p-2 m-5' id='start'>
+                    Start
+                </button>
+                <button class= 'btn btn-lrg p-2 m-5' id='reset'>
+                    Reset
                 </button>
             </div>
-        </section>
-        <section class='container pt-3 text-center'>
-            <div class='card bg-info'>
+            </div>
+        <section class='container text-center'>
+            <div class='card bg-info my-5'>
                 <div class="card-header text-white h5">
                     Hangman Game
                 </div>
@@ -52,6 +56,7 @@
                 </ul>
             </div>
         </section>
+    </section>
 <!-- Optional JavaScript -->
 <script src="assets/javascript/game.js"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
