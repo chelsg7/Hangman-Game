@@ -16,48 +16,51 @@
     <title>Hangman Game</title>
   </head>
   <body>
-      <section class='container-flex bg-secondary pb-5'>
-          <div class = 'row bg-success'>
-              <div class= 'container text-center pb-3'>
-                 <h1 class='display-2'>
-                    Hangman
-                </h1>
-                <h2 class='h1 text-warning'>
-                    Guess the Word:
-                </h2>
-                <div class = "display-3" id="word">
-                </div>
-                <button class= 'btn btn-lrg p-2 m-5' id='start'>
-                    Start
-                </button>
-                <button class= 'btn btn-lrg p-2 m-5' id='reset'>
-                    Reset
-                </button>
+<section class= 'container-flex bg-dark'>
+    <div class='container text-center py-5'>
+        <h1 class = "display-2 text-light">
+            Hangman Game
+        </h1>
+        <h2 class ="h2 text-success">
+            Guess the word:
+        </h2>
+        <div class= "bg-warning py-4 my-5" id="word">
+          <h5 class = 'h5' id="wordGoes">
+            Word will appear below
+          </h5>
+        </div>
+        <button class='btn btn-lrg mb-5' id="start">
+          Start or Reset Word Choice
+        </button>
+        <div class="card bg-info border-info">
+            <div class="card-header">
+              Statistics
             </div>
-            </div>
-        <section class='container text-center'>
-            <div class='card bg-info my-5'>
-                <div class="card-header text-white h5">
-                    Hangman Game
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item list-group-item-info" id='remain'>
-                        Number Guesses Remaining : 10 
-                    </li>
-                    <li class="list-group-item list-group-item-info" id='won'>
-                        Starting Wins: 0
-                    </li>
-                    <li class="list-group-item list-group-item-info" id="lost">
-                        Starting Losses: 0
-                    </li>
-                    <li class="list-group-item list-group-item-info" id= 'userInput'>
-                        Letters Guessed: 0
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </section>
-<!-- Optional JavaScript -->
+            <ul class="list-group">
+              <li class="list-group-item border-info">
+                Letter You Guessed:
+                <span id = 'userLetterGuess'> </span>
+              </li>
+              <li class="list-group-item border-info">
+                Guesses Remaining:
+                <span id= "guessLeft">
+                </span>
+              </li>
+              <li class="list-group-item border-info">
+                  Wins:
+                  <span id= "userWins">
+                  </span>
+              </li>
+              <li class="list-group-item border-info">
+                Losses:
+                <span id="userLosses">
+                </span>
+              </li>
+            </ul>
+          </div>
+      </div>
+  </section>
+  <!-- Optional JavaScript -->
 <script src="assets/javascript/game.js"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

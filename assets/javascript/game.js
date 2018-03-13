@@ -1,74 +1,64 @@
-//original variables
+// original variables
+var wordBank = ['lager', 'ipa', 'stout', 'porter', 'amber', 'pilsner', 'gose', 'ale', 'witbier', 'lambic', 'weissbier','saison', 'bock', 'kolsch', 'malt', 'hops', 'barley'];
+var random = Math.floor(Math.random() * wordBank.length);
+var wordChoice = wordBank[random];
+var wordLength = wordChoice.length;
+var guessStart = 10;
+var guessRemain = 10;
 var wins = 0;
 var losses = 0;
-var guesses = 10;
-var guessRemain = 10;
-var userGuessed = [];
-var original = ['lager', 'ipa', 'stout', 'porter', 'amber', 'pilsner', 'gose', 'ale', 'witbier', 'lambic', 'weissbier','saison', 'bock', 'kolsch', 'malt'];
-var originalChoice = original[Math.floor(Math.random() * original.length)];
-console.log(originalChoice);
+var usedLetters = [];
+var blankHang = [];
+var openHang = "";
+var userGuessList = [];
+var userKey = "";
+var arrNewChoice = "";
 
-document.getElementById("start").addEventListener("click", function(){
-  document.getElementById('remain').innerHTML = "Guesses Left Now : " + guessRemain;
-  document.getElementById('won').innerHTML = "Current Win Streak : " + wins;
-  document.getElementById('lost').innerHTML = "Current Loss Streak : " + losses;
-  document.getElementById('userInput').innerHTML = "Letters You Already Guessed : " + userGuessed;
-
-  var newChoice = original[Math.floor(Math.random() * original.length)];
-  console.log(newChoice);
-  var arrNewChoice = newChoice.split("");
-  console.log(arrNewChoice);
-  for (var i=0 ; i < newChoice.length; i++) {
-    //create a space holder here and append it to the div with ID "word"
-    var space = document.createElement('p');
-    var space2 = space.innerText = ' _ ';
-    document.getElementById('word').append(space2);
+//original functions
+function reset(){
+    random = Math.floor(Math.random() * wordBank.length);
+    wordChosen = wordBank[random];
+    wordBank.splice(random, 1);
+    guessStart = 10;
+    blankHang = [];
+    usedLetters = [];
+};
+var guessReset = function() {
+    document.getElementById('guessLeft').innerHTML = guessRemain;
+};
+  var updateUserGuesses = function() {
+    document.getElementById('userLetterGuess').innerHTML = userGuessList;
   };
 
-  
-  document.onkeyup = function(event){
-    var userGuess = event.key;
-    guessRemain--;
-    userGuessed.push(userGuess);
-    //set new variables equal to functions you need to run at key press
-    var newRemain = function() {
-      document.getElementById('remain').innerHTML = "Guesses Now Remaining: " + guessRemain;
-    };
-    var updateLetterGuess = function() {
-      this.userGuess = this.originalChoice[Math.floor(Math.random() * this.originalChoice.length)];
-    };
-    var updateGuesses = function() {
-      document.getElementById('userInput').innerHTML = "You Guessed: " + userGuessed.join(', ');
-    };
 
-    newRemain();
-    updateLetterGuess();
-    updateGuesses();
-    
-    var reset = function() {
-      guesses = 10;
-      guessRemain = 10;
-      guessed = [];
-      updateLetterGuess();
-      updateGuesses();
-      newGuess();
-      };
 
-    };
-  });
+  document.getElementById('start').addEventListener("click", function(){
+      random = Math.floor(Math.random() * wordBank.length);
+      var newChoice = wordBank[random];
+      console.log(newChoice); 
 
-/* 
-  document.getElementById('reset').addEventListener("click", function(){
-    //reset variable needs for game end
-     var reset1 = function() {
-      guesses = 10;
-      guessRemain = 10;
-      userGuessed = [];
-      wins = 0;
-      losses = 0;
-      };
+      guessReset();
+      document.getElementById('userWins').innerHTML = wins;
+      document.getElementById('userLosses').innerHTML = losses;
 
-      document.getElementById('word').append(space2);
-  });
+      var arrNewChoice = newChoice.split("");
+      console.log(arrNewChoice);
+      for (var i=0 ; i < newChoice.length; i++) {
+          var spaceCreate = document.createElement('p');
+          var blankCreate = spaceCreate.innerText = ' _ ';
+          document.getElementById('word').append(blankCreate);
+        };
 
-  */
+        document.onkeydown = function(event){
+            var userKey = event.key;
+            guessRemain--;
+            userGuessList.push(userKey);
+            guessReset();
+            updateUserGuesses();
+            for( var a = 0; a < arrNewChoice.length; a++){
+                console.log(arrNewChoice[a]);
+                
+            }
+        };
+
+  }) 
