@@ -53,20 +53,18 @@ var guessReset = function() {
       var arrNewChoice = newChoice.split("");
       console.log(arrNewChoice);
       for (var i=0 ; i < newChoice.length; i++) {
-          var spaceCreate = document.createElement('p');
-          var blankCreate = spaceCreate.innerText = ' _ ';
-          document.getElementById('word').append(blankCreate);
+          blankHang[i] = ' _ '
       };
 
+      document.getElementById("word").innerHTML = blankHang;
 
-          /* for (i = 0; i< newChoice.length ; i++) {
+/*      for (i = 0; i< newChoice.length ; i++) {
             pushChar = newChoice[i];
             console.log (pushChar);
             blankHang.push(pushChar);
         };
-        document.getElementById("word").innerHTML = blankHang;
-        };
-        */
+        
+    */
 
 
         document.onkeydown = function(event){
