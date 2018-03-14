@@ -9,7 +9,6 @@ var wins = 0;
 var losses = 0;
 var usedLetters = [];
 var blankHang = [];
-var openHang = "";
 var userGuessList = [];
 var userKey = "";
 var arrNewChoice = "";
@@ -20,7 +19,7 @@ function reset(){
     wordChosen = wordBank[random];
     wordBank.splice(random, 1);
     guessStart = 10;
-    blankHang = [];
+    blankHang = [" "];
     usedLetters = [];
 };
 var guessReset = function() {
@@ -29,7 +28,17 @@ var guessReset = function() {
   var updateUserGuesses = function() {
     document.getElementById('userLetterGuess').innerHTML = userGuessList;
   };
-
+  var wordPush = function(){
+      if ( 
+          userKey === "a" || userKey === "b" || userKey === "c" || userKey === "d" || userKey === "e" || userKey === "f" || userKey === "g" || userKey === "h" || userKey === "i" || userKey === "j" || userKey === "k" || userKey === "l" || userKey === "m" || userKey === "n" || userKey === "o" || userKey === "p" || userKey === "q" || userKey === "r" || userKey === "s" || userKey === "t" || userKey === "u" || userKey === "v" || userKey === "w" || userKey === "x" || userKey === "y" || userKey === "z"
+      ){
+          for (i = 0; i < arrNewChoice.length; i++){
+              if (keyPress === blankHang[i]) {
+                  blankHang[i] = keyPress;
+              }
+            }
+        }
+    };
 
 
   document.getElementById('start').addEventListener("click", function(){
@@ -47,18 +56,29 @@ var guessReset = function() {
           var spaceCreate = document.createElement('p');
           var blankCreate = spaceCreate.innerText = ' _ ';
           document.getElementById('word').append(blankCreate);
+      };
+
+
+          /* for (i = 0; i< newChoice.length ; i++) {
+            pushChar = newChoice[i];
+            console.log (pushChar);
+            blankHang.push(pushChar);
         };
+        document.getElementById("word").innerHTML = blankHang;
+        };
+        */
+
 
         document.onkeydown = function(event){
             var userKey = event.key;
             guessRemain--;
-            userGuessList.push(userKey);
+            userGuessList.push(" " +userKey);
             guessReset();
             updateUserGuesses();
+            wordPush();
             for( var a = 0; a < arrNewChoice.length; a++){
                 console.log(arrNewChoice[a]);
-                
+               
             }
-        };
-
-  }) 
+        }
+    })
