@@ -28,7 +28,6 @@ var guessReset = function() {
   var updateUserGuesses = function() {
     document.getElementById('userLetterGuess').innerHTML = userGuessList;
   };
-  var blankHang = ''.padStart('_',wordChoice.length);
 
   var wordPush = function(){
       if ( 
@@ -45,11 +44,10 @@ var guessReset = function() {
     };
 
 
-
   document.getElementById('start').addEventListener("click", function(){
       random = Math.floor(Math.random() * wordBank.length);
-      var newChoice = wordBank[random];
-      console.log(newChoice); 
+      var wordChoice = wordBank[random];
+      console.log(wordChoice); 
       
 
       guessReset();
@@ -57,16 +55,13 @@ var guessReset = function() {
       document.getElementById('userLosses').innerHTML = losses;
     
 
-      var arrNewChoice = newChoice.split("");
+      var arrNewChoice = wordChoice.split("");
       console.log(arrNewChoice);
-      for (var i=0 ; i < arrNewChoice.length; i++) {
-          blankHang[i] = ' _ '
-      };
 
       document.getElementById("word").innerHTML = blankHang;
 
-      for (i = 0; i< newChoice.length ; i++) {
-            pushChar = newChoice[i];
+      for (i = 0; i< wordChoice.length ; i++) {
+            pushChar = wordChoice[i];
             console.log (pushChar);
             blankHang.push(pushChar);
         };
