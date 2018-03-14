@@ -28,7 +28,8 @@ var guessReset = function() {
   var updateUserGuesses = function() {
     document.getElementById('userLetterGuess').innerHTML = userGuessList;
   };
-  /*
+  var blankHang = ''.padStart('_',wordChoice.length);
+
   var wordPush = function(){
       if ( 
           userKey === "a" || userKey === "b" || userKey === "c" || userKey === "d" || userKey === "e" || userKey === "f" || userKey === "g" || userKey === "h" || userKey === "i" || userKey === "j" || userKey === "k" || userKey === "l" || userKey === "m" || userKey === "n" || userKey === "o" || userKey === "p" || userKey === "q" || userKey === "r" || userKey === "s" || userKey === "t" || userKey === "u" || userKey === "v" || userKey === "w" || userKey === "x" || userKey === "y" || userKey === "z"
@@ -42,14 +43,14 @@ var guessReset = function() {
             };
         };
     };
-    */
+
 
 
   document.getElementById('start').addEventListener("click", function(){
       random = Math.floor(Math.random() * wordBank.length);
       var newChoice = wordBank[random];
       console.log(newChoice); 
-      var blankHang = ''.padStart('_', newChoice.length);
+      
 
       guessReset();
       document.getElementById('userWins').innerHTML = wins;
@@ -58,7 +59,7 @@ var guessReset = function() {
 
       var arrNewChoice = newChoice.split("");
       console.log(arrNewChoice);
-      for (var i=0 ; i < newChoice.length; i++) {
+      for (var i=0 ; i < arrNewChoice.length; i++) {
           blankHang[i] = ' _ '
       };
 
