@@ -1,83 +1,130 @@
-// original variables
 var wordBank = ['lager', 'ipa', 'stout', 'porter', 'amber', 'pilsner', 'gose', 'ale', 'witbier', 'lambic', 'weissbier','saison', 'bock', 'kolsch', 'malt', 'hops', 'barley'];
 var random = Math.floor(Math.random() * wordBank.length);
 var wordChoice = wordBank[random];
 var wordLength = wordChoice.length;
-var guessStart = 10;
-var guessRemain = 10;
+var lives = 10;
 var wins = 0;
 var losses = 0;
-var usedLetters = [];
-var blankHang = [];
-var userGuessList = [];
-var userKey = "";
-var arrNewChoice = "";
+var userLetters = [];
+var userGuess = "";
 
-//original functions
-function reset(){
-    random = Math.floor(Math.random() * wordBank.length);
-    wordChosen = wordBank[random];
-    wordBank.splice(random, 1);
-    guessStart = 10;
-    blankHang = [" "];
-    usedLetters = [];
-};
-var guessReset = function() {
-    document.getElementById('guessLeft').innerHTML = guessRemain;
-};
-  var updateUserGuesses = function() {
-    document.getElementById('userLetterGuess').innerHTML = userGuessList;
-  };
+console.log(wordChoice);
 
-  var wordPush = function(){
-      if ( 
-          userKey === "a" || userKey === "b" || userKey === "c" || userKey === "d" || userKey === "e" || userKey === "f" || userKey === "g" || userKey === "h" || userKey === "i" || userKey === "j" || userKey === "k" || userKey === "l" || userKey === "m" || userKey === "n" || userKey === "o" || userKey === "p" || userKey === "q" || userKey === "r" || userKey === "s" || userKey === "t" || userKey === "u" || userKey === "v" || userKey === "w" || userKey === "x" || userKey === "y" || userKey === "z"
-      ){
-          for (i = 0; i < wordChoice.length; i++){
-              if (userKey === wordChoice[i]) {
-                  blankHang[i] = userKey;
-              } else{
-                  console.log('no changes');
-              };
-            };
+var blanksArray = [];
+for(var i = 0; i < wordChoice.length; i++){
+    blanksArray[i]= ' _ ';
+    };
+    document.getElementById("word").innerHTML = blanksArray.join("");
+    
+var splitWordArray = [];
+splitWordArray = wordChoice.split("");
+
+
+
+var checkArray = function(){
+    for (var i = 0; i < splitWordArray.length; i++) {
+        if (userGuess === splitWordArray[i]) {
+            blanksArray[i] = userGuess;
+            document.getElementById("word").innerHTML = blanksArray.join(" ");
         };
     };
+};
 
+    var gameWin = false;
+    var checkWin = function(){
+        console.log("inside checkwin");
+        if (splitWordArray.indexOf(userGuess) > -1){
+            if(blanksArray.indexOf(" _ ") === -1){ 
+                console.log("win");
 
-  document.getElementById('start').addEventListener("click", function(){
-      random = Math.floor(Math.random() * wordBank.length);
-      var wordChoice = wordBank[random];
-      console.log(wordChoice); 
-      
-
-      guessReset();
-      document.getElementById('userWins').innerHTML = wins;
-      document.getElementById('userLosses').innerHTML = losses;
-    
-
-      var arrNewChoice = wordChoice.split("");
-      console.log(arrNewChoice);
-
-      document.getElementById("word").innerHTML = blankHang;
-
-      for (i = 0; i< wordChoice.length ; i++) {
-            pushChar = wordChoice[i];
-            console.log (pushChar);
-            blankHang.push(pushChar);
-        };
-
-
-
-        document.onkeydown = function(event){
-            var userKey = event.key;
-            guessRemain--;
-            userGuessList.push(" " +userKey);
-            guessReset();
-            updateUserGuesses();
-            wordPush();
-            for( var a = 0; a < arrNewChoice.length; a++){
-                console.log(arrNewChoice[a]);
-               
+                alert('You win! ' + wordChoice + " was the right word!");
+                wins++;
+                updateWins();
+                return gameWin = true; 
             }
+        } else if (lives === 0) {
+            /*
+            for (var i =0; i = blanksArray.length; i++){
+                if(blanksArray.indexOf(" _ ") !== -1){ 
+                    console.log('you lost');
+                    return gameWin = false;
+                }*/
+                alert('you lost! ' + wordChoice + ' was the right word!');
+                losses++;
+            } 
         }
-    })
+    
+    
+    // var win = true
+    // if (splitWordArray === blanksArray){alert('win'); };
+
+    // if win = true, then run winGame()
+
+var updateUserGuess = function(){
+    document.getElementById('userLetterGuess').innerHTML = userLetters;
+};
+
+var updateGuessNumber = function(){
+    document.getElementById("guessLeft").innerHTML = lives;
+};
+
+var updateWins = function(){
+    document.getElementById('userWins').innerHTML = wins;
+};
+
+var updateLosses = function(){
+    document.getElementById('userLosses').innerHTML = losses;
+};
+
+//reset
+
+var reset = function(){
+    random = Math.floor(Math.random() * wordBank.length);
+    wordChoice = wordBank[random];
+    lives = 10;
+    wins = 0;
+    losses = 0;
+    userLetters = [];
+    userGuess = "";
+    blanksArray = [];
+    splitWordArray = [];
+    gameWin = false;
+    updateGuessNumber();
+    updateUserGuess();
+    updateLosses();
+    updateWins();
+}
+
+console.log(blanksArray);
+console.log(splitWordArray);
+
+document.getElementById('start').addEventListener("click", function(){
+    updateGuessNumber();
+    updateWins();
+    updateLosses();
+});
+
+document.getElementById('reset').addEventListener("click", function(){
+    reset();
+});
+
+
+document.onkeyup = function(event){
+    userGuess = event.key;
+    checkArray();
+    userLetters.push(" " + userGuess);
+    updateUserGuess();
+    lives--;
+    updateGuessNumber();
+    updateWins();
+    updateLosses();
+
+    if(lives === 0){
+        losses++;
+        updateLosses();
+        console.log("before checkwin");
+        checkWin();
+    } else if (lives !== 0){
+        checkWin();
+    };
+};
