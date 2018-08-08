@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- StyleSheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hangman Game</title>
+  </head>
+  <body>
+<section class= 'container-flex bg-dark'>
+    <div class='container text-center py-5'>
+        <h1 class = "display-2 text-light">
+            Hangman Game
+        </h1>
+        <h2 class ="h2 text-success">
+            Guess the word:
+        </h2>
+        <div class= "bg-warning py-4 my-5">
+          <h5 class = 'h5'>
+            Word will appear below
+          </h5>
+          <span id="wordDisplay"></span>
+          <h5 class="h5">
+            Guess the Beer Themed Words!
+          </h5>
+          <h5>
+            Hit Reset after a win or loss to restart the game with a new word and board.
+          </h5>
+        </div>
+        <button class='btn btn-lrg mb-5' id="start">
+          Start
+        </button>
+        <button class='btn btn-lrg mb-5' id="reset">
+          Reset
+        </button>
+        <div class="card bg-info border-info">
+            <div class="card-header">
+              Statistics
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item border-info">
+                <!-- Letter You Guessed: -->
+                <span id = 'guessedLetters'> </span>
+              </li>
+              <li class="list-group-item border-info">
+                <!-- Guesses Remaining: -->
+                <span id= "guessesLeft">
+                </span>
+              </li>
+              <li class="list-group-item border-info">
+                  <!-- Wins: -->
+                  <span id= "wins">
+                  </span>
+              </li>
+              <li class="list-group-item border-info">
+                <!-- Losses: -->
+                <span id="losses">
+                </span>
+              </li>
+            </ul>
+          </div>
+      </div>
+  </section>
+  <!-- Optional JavaScript -->
+<script src="assets/javascript/game.js"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+  </body>
+  </html>

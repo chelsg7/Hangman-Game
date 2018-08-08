@@ -1,7 +1,16 @@
-.georgia {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+body, html {
+    height: 100%;
 }
 
-#word{
-    font-size: 3rem;
+#bg { 
+    /* The image used */
+    background-image: url("../images/back5.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

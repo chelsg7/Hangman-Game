@@ -1,130 +1,146 @@
 var wordBank = ['lager', 'ipa', 'stout', 'porter', 'amber', 'pilsner', 'gose', 'ale', 'witbier', 'lambic', 'weissbier','saison', 'bock', 'kolsch', 'malt', 'hops', 'barley'];
-var random = Math.floor(Math.random() * wordBank.length);
-var wordChoice = wordBank[random];
-var wordLength = wordChoice.length;
-var lives = 10;
-var wins = 0;
-var losses = 0;
-var userLetters = [];
+
+var alphaArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", ];
+
+var indexPointer = Math.floor(Math.random() * wordBank.length);
+
+var word = wordBank[indexPointer];
+
+var wordLength = word.length;
+
+var lettersUsed = [];
+
+var blankDisplay = [];
+
 var userGuess = "";
 
-console.log(wordChoice);
+var txt = "";
 
-var blanksArray = [];
-for(var i = 0; i < wordChoice.length; i++){
-    blanksArray[i]= ' _ ';
-    };
-    document.getElementById("word").innerHTML = blanksArray.join("");
-    
-var splitWordArray = [];
-splitWordArray = wordChoice.split("");
+var lettersTxt= "";
 
+var guessCounter = 8;
 
+var guess = 0;
 
-var checkArray = function(){
-    for (var i = 0; i < splitWordArray.length; i++) {
-        if (userGuess === splitWordArray[i]) {
-            blanksArray[i] = userGuess;
-            document.getElementById("word").innerHTML = blanksArray.join(" ");
-        };
-    };
-};
+var losses = 0;
 
-    var gameWin = false;
-    var checkWin = function(){
-        console.log("inside checkwin");
-        if (splitWordArray.indexOf(userGuess) > -1){
-            if(blanksArray.indexOf(" _ ") === -1){ 
-                console.log("win");
+var wins = 0;
 
-                alert('You win! ' + wordChoice + " was the right word!");
-                wins++;
-                updateWins();
-                return gameWin = true; 
-            }
-        } else if (lives === 0) {
-            /*
-            for (var i =0; i = blanksArray.length; i++){
-                if(blanksArray.indexOf(" _ ") !== -1){ 
-                    console.log('you lost');
-                    return gameWin = false;
-                }*/
-                alert('you lost! ' + wordChoice + ' was the right word!');
-                losses++;
-            } 
-        }
-    
-    
-    // var win = true
-    // if (splitWordArray === blanksArray){alert('win'); };
+// Fuctions ========================
 
-    // if win = true, then run winGame()
-
-var updateUserGuess = function(){
-    document.getElementById('userLetterGuess').innerHTML = userLetters;
-};
-
-var updateGuessNumber = function(){
-    document.getElementById("guessLeft").innerHTML = lives;
-};
-
-var updateWins = function(){
-    document.getElementById('userWins').innerHTML = wins;
-};
-
-var updateLosses = function(){
-    document.getElementById('userLosses').innerHTML = losses;
-};
-
-//reset
-
-var reset = function(){
-    random = Math.floor(Math.random() * wordBank.length);
-    wordChoice = wordBank[random];
-    lives = 10;
-    wins = 0;
-    losses = 0;
-    userLetters = [];
-    userGuess = "";
-    blanksArray = [];
-    splitWordArray = [];
-    gameWin = false;
-    updateGuessNumber();
-    updateUserGuess();
-    updateLosses();
-    updateWins();
+function reset(){
+    indexPointer = Math.floor(Math.random() * wordBank.length);
+    word = wordBank[indexPointer];
+    wordLength = word.length;
+    wordBank.splice(indexPointer, 1);
+    guessCounter = 8;
+    txt = "";
+    blankDisplay = [];
+    lettersUsed = [];
+    for (var i = 0; i<wordLength; i++){
+        blankDisplay.push("__");
+    }
+    for (var i = 0; i<blankDisplay.length; i++){
+        txt += blankDisplay[i] + " ";
+    }
+    document.getElementById("wordDisplay").textContent = txt;
+    document.getElementById("guessDiv").textContent = "Press any letter to start.";
+    document.getElementById("guessesLeft").textContent = "Guesses: 8";
+    document.getElementById("guessedLetters").textContent = " ";
 }
 
-console.log(blanksArray);
-console.log(splitWordArray);
+// Main Process ====================
 
-document.getElementById('start').addEventListener("click", function(){
-    updateGuessNumber();
-    updateWins();
-    updateLosses();
-});
+for (var i = 0; i<wordLength; i++){
+blankDisplay.push("__");
+}
+for (var i = 0; i<blankDisplay.length; i++){
+txt += blankDisplay[i] + " ";
+}
 
-document.getElementById('reset').addEventListener("click", function(){
-    reset();
-});
+wordBank.splice(indexPointer, 1);
+document.getElementById("wordDisplay").textContent = txt;
+document.getElementById("guessesLeft").textContent = "Guesses: 8";
 
-
+//the user presses a key to start the game. the letter pressed is stored in variable userGuess
 document.onkeyup = function(event){
-    userGuess = event.key;
-    checkArray();
-    userLetters.push(" " + userGuess);
-    updateUserGuess();
-    lives--;
-    updateGuessNumber();
-    updateWins();
-    updateLosses();
+userGuess = event.key;
+userGuess = userGuess.toLowerCase();
 
-    if(lives === 0){
+    if( userGuess === "a" || userGuess === "b" || userGuess === "c" || userGuess === "d" || userGuess === "e" ||     userGuess === "f" || userGuess === "g" || userGuess === "h" || userGuess === "i" || userGuess === "j" || userGuess === "k" || userGuess === "l" || userGuess === "m" || userGuess === "n" || userGuess === "o" || userGuess === "p" || userGuess === "q" || userGuess === "r" || userGuess === "s" || userGuess === "t" ||         userGuess === "u" || userGuess === "v" || userGuess === "w" || userGuess === "x" || userGuess === "y" || userGuess === "z"){
+
+    //check for loss
+    if (guessCounter === 0){
         losses++;
-        updateLosses();
-        console.log("before checkwin");
-        checkWin();
-    } else if (lives !== 0){
-        checkWin();
-    };
+        document.getElementById("losses").textContent = "Losses: " + losses;
+        alert("You've run out of guesses. The correct answer was " + word);
+        reset();
+    }
+
+    //user makes a guess
+    else{
+
+        var found = 0
+        for (var i=0;i<lettersUsed.length;i++){
+            if (userGuess===lettersUsed[i]){
+                found++;
+            }
+        }
+
+        if(found===0){
+            //loop through every character in the word to see if the userGuess matches
+            for (var c = 0; c<wordLength; c++){
+                var letter = word.charAt(c);
+                
+                //if statement determines if the guess was correct
+                if (letter === userGuess){
+                    console.log(letter);
+
+                    //replaces any correct guesses witht the "__" in the diaplay array
+                    for (b = 0; b<wordLength; b++){
+                        var changeIndex = c;
+                        blankDisplay[c] = letter;
+                    }
+                    guess++;
+                }
+            }
+
+            txt = "";
+
+            //re-builds the display string with any correct guesses added
+            for (var i = 0; i<blankDisplay.length; i++){
+                txt += blankDisplay[i] + " ";
+            }
+
+            //userGuess is added to the lettersUsed array to remind user what they've already guessed
+            lettersUsed.push(userGuess);
+            document.getElementById("wordDisplay").textContent = txt;
+            document.getElementById("guessDiv").textContent = "You guessed letter: " + userGuess;
+
+            lettersTxt = lettersUsed + ",";
+            lettersTxt = lettersTxt.replace(/,/g," ");
+            document.getElementById("guessedLetters").textContent =  lettersTxt;
+
+            
+
+            //check for a win, else user looses a guess
+            if (guess>=1){
+                txt = txt.replace(/\s/g,"");
+                if (txt === word){
+                    wins++;
+                    document.getElementById("wins").textContent = "Wins: " + wins;
+                    alert("You won!! You guessed " + word + "!");
+                    reset();
+                }
+            }
+            else{
+                guessCounter--;
+                document.getElementById("guessesLeft").textContent = "Guesses: " + guessCounter;
+            }
+            guess = 0;
+        }
+       
+    }
+}
 };
+
